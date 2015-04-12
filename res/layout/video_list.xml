@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       android:id="@+id/container"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+        >
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/rb_red"
+            >
+
+        <ImageView
+                android:id="@+id/rbu_logo"
+                android:layout_width="192dp"
+                android:layout_height="52dp"
+                android:src="@drawable/rbu_logo"
+                android:layout_marginLeft="64dp"
+                android:layout_marginRight="64dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                />
+
+        <ImageView
+                android:id="@+id/rb_logo"
+                android:layout_width="38dp"
+                android:layout_height="48dp"
+                android:src="@drawable/rb_logo"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                />
+
+        <fragment
+                class="com.rockbase.unplugged.fragments.VideoListFragment"
+                android:id="@+id/list_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/rbu_logo"
+                android:layout_above="@id/rb_logo"
+                android:background="@color/rb_red"
+                />
+
+        <fragment
+                class="com.rockbase.unplugged.fragments.VideoFragment"
+                android:id="@+id/video_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                />
+
+    </RelativeLayout>
+
+</merge>
