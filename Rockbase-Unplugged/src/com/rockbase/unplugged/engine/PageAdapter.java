@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.rockbase.unplugged.DeveloperKey;
@@ -31,7 +30,6 @@ public final class PageAdapter extends BaseAdapter {
         thumbnailViewToLoaderMap = new HashMap<YouTubeThumbnailView, YouTubeThumbnailLoader>();
         inflater = LayoutInflater.from(context);
         thumbnailListener = new ThumbnailListener();
-
     }
 
     public void releaseLoaders() {
@@ -60,23 +58,18 @@ public final class PageAdapter extends BaseAdapter {
         View view = convertView;
         VideoEntry entry = entries.get(position);
 
-        // There are three cases here
         if (view == null) {
-            // 1) The view has not yet been created - we need to initialize the YouTubeThumbnailView.
             view = inflater.inflate(R.layout.video_item, parent, false);
             YouTubeThumbnailView thumbnail = (YouTubeThumbnailView) view.findViewById(R.id.thumbnail);
+            //thumbnail.
             thumbnail.setTag(entry.videoId);
             thumbnail.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
         } else {
             YouTubeThumbnailView thumbnail = (YouTubeThumbnailView) view.findViewById(R.id.thumbnail);
             YouTubeThumbnailLoader loader = thumbnailViewToLoaderMap.get(thumbnail);
             if (loader == null) {
-                // 2) The view is already created, and is currently being initialized. We store the
-                //    current videoId in the tag.
                 thumbnail.setTag(entry.videoId);
             } else {
-                // 3) The view is already created and already initialized. Simply set the right videoId
-                //    on the loader.
                 thumbnail.setImageResource(R.drawable.loading_thumbnail);
                 loader.setVideo(entry.videoId);
             }
@@ -84,33 +77,5 @@ public final class PageAdapter extends BaseAdapter {
         return view;
     }
 
-    private final class ThumbnailListener implements
-            YouTubeThumbnailView.OnInitializedListener,
-            YouTubeThumbnailLoader.OnThumbnailLoadedListener {
-
-        @Override
-        public void onInitializationSuccess(YouTubeThumbnailView view, YouTubeThumbnailLoader loader) {
-            loader.setOnThumbnailLoadedListener(this);
-            //thumbnailViewToLoaderMap.put(view, loader);
-            //view.setImageResource(R.drawable.loading_thumbnail);
-            String videoId = (String) view.getTag();
-            loader.setVideo(videoId);
-        }
-
-        @Override
-        public void onInitializationFailure(
-                YouTubeThumbnailView view, YouTubeInitializationResult loader) {
-            //view.setImageResource(R.drawable.no_thumbnail);
-        }
-
-        @Override
-        public void onThumbnailLoaded(YouTubeThumbnailView view, String videoId) {
-        }
-
-        @Override
-        public void onThumbnailError(YouTubeThumbnailView view, YouTubeThumbnailLoader.ErrorReason errorReason) {
-            //view.setImageResource(R.drawable.no_thumbnail);
-        }
-    }
 
 }

@@ -44,6 +44,9 @@ public final class VideoListFragment extends ListFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
+        ListView listView = this.getListView();
+        listView.setDivider(null);
+        listView.setSelector(R.drawable.list_selector);
         super.onActivityCreated(savedInstanceState);
     }
 

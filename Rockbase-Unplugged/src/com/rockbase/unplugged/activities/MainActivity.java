@@ -7,6 +7,7 @@ package com.rockbase.unplugged.activities;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.*;
 import android.widget.*;
 import com.google.android.youtube.player.YouTubeApiServiceUtil;
@@ -24,7 +25,7 @@ import com.rockbase.unplugged.fragments.VideoFragment;
 import com.rockbase.unplugged.fragments.VideoListFragment;
 
 @TargetApi(13)
-public final class MainActivity extends Activity implements OnFullscreenListener {
+public final class MainActivity extends Activity implements View.OnClickListener, OnFullscreenListener {
 
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
@@ -40,6 +41,8 @@ public final class MainActivity extends Activity implements OnFullscreenListener
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.video_list);
+
+        prepareButtons();
 
         listFragment = (VideoListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
         videoFragment = (VideoFragment) getFragmentManager().findFragmentById(R.id.video_fragment_container);
@@ -83,6 +86,14 @@ public final class MainActivity extends Activity implements OnFullscreenListener
         refreshLayout();
     }
 
+    private void prepareButton(int viewId){
+        findViewById(viewId).setOnClickListener(this);
+    }
+
+    private void prepareButtons(){
+        prepareButton(R.id.rb_logo);
+    }
+
     private void refreshLayout() {
         boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
@@ -120,4 +131,14 @@ public final class MainActivity extends Activity implements OnFullscreenListener
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rb_logo:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse((String) getText(R.string.rockbase_url)));
+                startActivity(i);
+                break;
+        }
+    }
 }

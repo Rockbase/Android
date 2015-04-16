@@ -14,8 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@android:color/black"
+<com.rockbase.unplugged.engine.RoundedCornerLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
@@ -28,8 +27,6 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
             />
 
-</LinearLayout>
+</com.rockbase.unplugged.engine.RoundedCornerLayout>
