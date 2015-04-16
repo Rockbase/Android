@@ -1,22 +1,10 @@
-/*
- * Copyright 2012 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * @copyright Rockbase
+ * @author Alex Belencoso
  */
 package com.rockbase.unplugged.activities;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.content.Context;
 import android.view.*;
@@ -25,13 +13,10 @@ import com.google.android.youtube.player.YouTubeApiServiceUtil;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer.OnFullscreenListener;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import com.rockbase.unplugged.R;
@@ -41,9 +26,6 @@ import com.rockbase.unplugged.fragments.VideoListFragment;
 @TargetApi(13)
 public final class MainActivity extends Activity implements OnFullscreenListener {
 
-    /**
-     * The request code when calling startActivityForResult to recover from an API service error.
-     */
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
     private VideoListFragment listFragment;
@@ -62,7 +44,7 @@ public final class MainActivity extends Activity implements OnFullscreenListener
         listFragment = (VideoListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
         videoFragment = (VideoFragment) getFragmentManager().findFragmentById(R.id.video_fragment_container);
 
-        layout();
+        refreshLayout();
 
         checkYouTubeApi();
     }
@@ -92,22 +74,16 @@ public final class MainActivity extends Activity implements OnFullscreenListener
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        //layout();
+        //refreshLayout();
     }
 
     @Override
     public void onFullscreen(boolean isFullscreen) {
         this.isFullscreen = !this.isPlaying;
-        layout();
+        refreshLayout();
     }
 
-    /**
-     * Sets up the layout programatically for the three different states. Portrait, landscape or
-     * fullscreen+landscape. This has to be done programmatically because we handle the orientation
-     * changes ourselves in order to get fluent fullscreen transitions, so the xml layout resources
-     * do not get reloaded.
-     */
-    private void layout() {
+    private void refreshLayout() {
         boolean isPortrait = getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
         listFragment.getView().setVisibility(!isPortrait && isPlaying ? View.GONE : View.VISIBLE);
@@ -132,13 +108,6 @@ public final class MainActivity extends Activity implements OnFullscreenListener
         listFragment.getListView().requestLayout();
     }
 
-    /**
-     * Adapter for the video list. Manages a set of YouTubeThumbnailViews, including initializing each
-     * of them only once and keeping track of the loader of each one. When the ListFragment gets
-     * destroyed it releases all the loaders.
-     */
-
-    // Utility methods for layouting.
     private int dpToPx(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density + 0.5f);
     }

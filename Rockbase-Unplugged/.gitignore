@@ -6,6 +6,7 @@ hs_err_pid*
 
 # Private documentation
 .private/*
+DeveloperKey.java
 
 # IDE files
 .idea/*
