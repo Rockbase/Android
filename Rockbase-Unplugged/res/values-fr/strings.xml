@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_player">Erreur d\'initialisation YouTubePlayer (%1$s)</string>
+    <string name="error_thumbnail_view">Erreur d\'initialisation YouTubeThumbnailView (%1$s)</string>
+    <string name="credits_producers">Produit par</string>
+    <string name="credits_diego">Enregistrement Sonore et Mixage</string>
+    <string name="credits_alex">Cinématographie, Édition,</string>
+    <string name="credits_alex_2">Caméras et Éclairage</string>
+    <string name="credits_luisa">Caméras, Éclairage et Assistante d\'Édition</string>
+    <string name="credits_alonso">Assitant d\'Enregistrement</string>
+    <string name="credits_cholo">Caméras, Éclairage et Interview</string>
+    <string name="credits_rita">Assitante des Décors</string>
+    <string name="video_option_description">Voir la description</string>
+    <string name="video_option_share">Partager la vidéo</string>
+    <string name="long_click_tip">Appuyer longuement sur la vidéo pour voir les options</string>
+</resources>

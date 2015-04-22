@@ -42,6 +42,13 @@ public final class MainActivity extends Activity implements View.OnClickListener
 
         setContentView(R.layout.video_list);
 
+        /** TODO Android 5
+         Window window = this.getWindow();
+         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+         window.setStatusBarColor(this.getResources().getColor(R.color.rb_red));
+         */
+
         prepareButtons();
 
         listFragment = (VideoListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
@@ -50,6 +57,35 @@ public final class MainActivity extends Activity implements View.OnClickListener
         refreshLayout();
 
         checkYouTubeApi();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            videoFragment.pause();
+            isPlaying = false;
+            isFullscreen = false;
+            refreshLayout();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, android.view.KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                View container = findViewById(R.id.video_description_container);
+                if (container.getVisibility() == View.VISIBLE) {
+                    hideDescription();
+                    return true;
+                } else if (isPlaying) {
+                    isPlaying = false;
+                    isFullscreen = false;
+                    refreshLayout();
+                }
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
     private void checkYouTubeApi() {
@@ -86,12 +122,13 @@ public final class MainActivity extends Activity implements View.OnClickListener
         refreshLayout();
     }
 
-    private void prepareButton(int viewId){
+    private void prepareButton(int viewId) {
         findViewById(viewId).setOnClickListener(this);
     }
 
-    private void prepareButtons(){
+    private void prepareButtons() {
         prepareButton(R.id.rb_logo);
+        prepareButton(R.id.button);
     }
 
     private void refreshLayout() {
@@ -132,13 +169,21 @@ public final class MainActivity extends Activity implements View.OnClickListener
 
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.rb_logo:
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse((String) getText(R.string.rockbase_url)));
-                startActivity(i);
+                Intent myIntent = new Intent(MainActivity.this, CreditsActivity.class);
+                MainActivity.this.startActivity(myIntent);
+                break;
+            case R.id.button:
+                hideDescription();
                 break;
         }
     }
+
+    private void hideDescription() {
+        View container = findViewById(R.id.video_description_container);
+        container.setVisibility(View.GONE);
+    }
+
 }

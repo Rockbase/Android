@@ -9,11 +9,12 @@ import android.widget.FrameLayout;
 
 public class RoundedCornerLayout extends FrameLayout {
     private final static float CORNER_RADIUS = 32.0f;
-    public final static int MARGIN_BOTTOM = 24;
+    public final static int MARGIN_BOTTOM = 32;
 
     private Bitmap maskBitmap;
     private Paint paint, maskPaint;
     private float cornerRadius;
+    public boolean last = false;
 
     public RoundedCornerLayout(Context context) {
         super(context);
@@ -53,7 +54,11 @@ public class RoundedCornerLayout extends FrameLayout {
             super.draw(offscreenCanvas);
 
             if (maskBitmap == null) {
-                maskBitmap = createMask(canvas.getWidth(), canvas.getHeight() - MARGIN_BOTTOM);
+                height = canvas.getHeight();
+                if (!last) {
+                    height -= MARGIN_BOTTOM;
+                }
+                maskBitmap = createMask(canvas.getWidth(), height);
             }
 
             offscreenCanvas.drawBitmap(maskBitmap, 0f, 0f, maskPaint);

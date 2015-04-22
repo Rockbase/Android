@@ -36,6 +36,7 @@ public final class VideoFragment extends YouTubePlayerFragment implements YouTub
             this.videoId = videoId;
             if (player != null) {
                 player.setFullscreen(true);
+                ((MainActivity) getActivity()).isPlaying = true;
                 player.cueVideo(videoId);
             }
         }
@@ -54,7 +55,6 @@ public final class VideoFragment extends YouTubePlayerFragment implements YouTub
         if (!restored && videoId != null) {
             player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE);
             player.setOnFullscreenListener((MainActivity) getActivity());
-            ((MainActivity) getActivity()).isPlaying = true;
             player.cueVideo(videoId);
         }
     }

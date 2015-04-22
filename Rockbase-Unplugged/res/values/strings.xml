@@ -5,4 +5,25 @@
     <string name="error_thumbnail_view">There was an error initializing the YouTubeThumbnailView (%1$s)</string>
     <string name="rockbase_url">http://www.rockbase.com</string>
     <string name="rbu_playlist">PL4lVfCYRLO4VYNzQySkQ_u-06CvgUfdFf</string>
+    <string name="credits_producers">Produced by</string>
+    <string name="credits_producer_rockbase">Rockbase</string>
+    <string name="credits_producer_scots">Scots Records</string>
+    <string name="credits_producer_rocka">Rocka Sonora</string>
+    <string name="credits_diego_name">Diego Gila \"El Escocés\"</string>
+    <string name="credits_diego">Sound Recording &amp; Mixing</string>
+    <string name="credits_alex_name">Alex Belencoso</string>
+    <string name="credits_alex">Cinematographer, Film Editor,</string>
+    <string name="credits_alex_2">Cameras &amp; Lighting</string>
+    <string name="credits_luisa_name">Luisa Barbu</string>
+    <string name="credits_luisa">Cameras, Lighting &amp; Assistant Edition</string>
+    <string name="credits_alonso_name">Alonso Gimeno</string>
+    <string name="credits_alonso">Recording Assistant</string>
+    <string name="credits_cholo_name">Sergio París \"Cholo\"</string>
+    <string name="credits_cholo">Cameras, Lighting &amp; Interview</string>
+    <string name="credits_rita_name">Rita Moreno</string>
+    <string name="credits_rita">Art &amp; Sets Assistant</string>
+    <string name="video_option_description">View description</string>
+    <string name="video_option_share">Share video</string>
+    <string name="youtube_video_url"> http://youtu.be/</string>
+    <string name="long_click_tip">Long click on video to show options</string>
 </resources>

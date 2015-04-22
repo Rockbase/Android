@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
  * Time: 15:32
  * To change this template use File | Settings | File Templates.
  */
-public class GetURLTask extends AsyncTask<String, Void, String[]> {
+public class GetURLTask extends AsyncTask<String, Void, String[][]> {
 
     private Exception exception;
 
@@ -40,7 +40,7 @@ public class GetURLTask extends AsyncTask<String, Void, String[]> {
         }
     }
 
-    protected String[] doInBackground(String... url) {
+    protected String[][] doInBackground(String... url) {
         try {
             HttpClient client = new DefaultHttpClient();
             HttpGet clientGetMethod = new HttpGet(url[0]);
@@ -50,11 +50,22 @@ public class GetURLTask extends AsyncTask<String, Void, String[]> {
             JSONArray entries = new JSONObject(infoString).getJSONObject("feed").getJSONArray("entry");
             int numVideos = entries.length();
             String[] videoIds = new String[numVideos];
-            for (int i=0; i<numVideos; i++){
-                videoIds[i] = entries.getJSONObject(i).getJSONObject("media$group").getJSONObject("yt$videoid").getString("$t");
+            String[] videoTitles = new String[numVideos];
+            String[] videoDescriptions = new String[numVideos];
+            for (int i = 0; i < numVideos; i++) {
+                JSONObject entry = entries.getJSONObject(i).getJSONObject("media$group");
+                videoIds[i] = entry.getJSONObject("yt$videoid").getString("$t");
+                videoTitles[i] = entry.getJSONObject("media$title").getString("$t");
+                videoDescriptions[i] = entry.getJSONObject("media$description").getString("$t");
             }
 
-            return videoIds;
+
+            String[][] data = new String[3][];
+            data[0] = videoIds;
+            data[1] = videoTitles;
+            data[2] = videoDescriptions;
+
+            return data;
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -83,7 +94,7 @@ public class GetURLTask extends AsyncTask<String, Void, String[]> {
     }
 
 
-    protected void onPostExecute(String[] json) {
+    protected void onPostExecute(String[][] json) {
         if (dialog != null) {
             if (dialog.isShowing()) {
                 dialog.dismiss();
@@ -91,7 +102,7 @@ public class GetURLTask extends AsyncTask<String, Void, String[]> {
         }
 
         if (this.activity != null) {
-            this.activity.setVideos(json);
+            this.activity.setVideos(json[0], json[1], json[2]);
         }
     }
 }

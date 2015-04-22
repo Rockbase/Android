@@ -63,6 +63,8 @@ public final class PageAdapter extends BaseAdapter {
             YouTubeThumbnailView thumbnail = (YouTubeThumbnailView) view.findViewById(R.id.thumbnail);
             //thumbnail.
             thumbnail.setTag(entry.videoId);
+            thumbnailListener.last.put(entry.videoId, position == this.getCount() - 1);
+
             thumbnail.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
         } else {
             YouTubeThumbnailView thumbnail = (YouTubeThumbnailView) view.findViewById(R.id.thumbnail);

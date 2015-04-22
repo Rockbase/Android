@@ -22,8 +22,8 @@
                 android:layout_marginRight="64dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
                 />
 
         <ImageView
@@ -33,8 +33,8 @@
                 android:src="@drawable/rb_logo"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 />
 
         <fragment
@@ -53,6 +53,46 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 />
+
+        <RelativeLayout
+                android:id="@+id/video_description_container"
+                android:background="@color/rb_red"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                >
+            <Button
+                    android:id="@+id/button"
+                    android:background="@android:color/black"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ok"
+                    android:textColor="@android:color/white"
+                    android:layout_alignParentBottom="true"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    />
+            <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_above="@id/button"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    >
+                <WebView
+                        android:id="@+id/video_description"
+                        android:background="@android:color/transparent"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textColor="@android:color/white"
+                        android:textSize="16dp"
+                        android:linksClickable="true"
+                        />
+            </ScrollView>
+        </RelativeLayout>
 
     </RelativeLayout>
 

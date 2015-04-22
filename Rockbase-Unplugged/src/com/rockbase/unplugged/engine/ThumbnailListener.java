@@ -8,9 +8,15 @@ import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.rockbase.unplugged.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public final class ThumbnailListener implements
         YouTubeThumbnailView.OnInitializedListener,
         YouTubeThumbnailLoader.OnThumbnailLoadedListener {
+
+
+    public Map<String, Boolean> last = new HashMap<String, Boolean>();
 
     @Override
     public void onInitializationSuccess(YouTubeThumbnailView view, YouTubeThumbnailLoader loader) {
@@ -35,7 +41,11 @@ public final class ThumbnailListener implements
         int destinationHeight = Math.round(((float) sourceHeight / sourceWidth) * destinationWidth);
         view.setMinimumHeight(destinationHeight);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(destinationWidth, destinationHeight);
-        params.bottomMargin = RoundedCornerLayout.MARGIN_BOTTOM;
+        boolean lastItem = last.get(videoId);
+        ((RoundedCornerLayout) view.getParent()).last = lastItem;
+        if (!lastItem) {
+            params.bottomMargin = RoundedCornerLayout.MARGIN_BOTTOM;
+        }
         view.setLayoutParams(params);
     }
 
