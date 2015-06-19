@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Rockbase Unplugged</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="error_json">There was an error getting videos from YouTube</string>
     <string name="error_thumbnail_view">There was an error initializing the YouTubeThumbnailView (%1$s)</string>
     <string name="rockbase_url">http://www.rockbase.com</string>
     <string name="rbu_playlist">PL4lVfCYRLO4VYNzQySkQ_u-06CvgUfdFf</string>

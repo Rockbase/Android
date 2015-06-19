@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error_player">Error al inicializar YouTubePlayer (%1$s)</string>
+    <string name="error_json">Error al recuperar la lista de los vídeos de YouTube</string>
     <string name="error_thumbnail_view">Error al inicializar YouTubeThumbnailView (%1$s)</string>
     <string name="credits_producers">Producido por</string>
     <string name="credits_diego">Grabación de Sonido y Mezcla</string>

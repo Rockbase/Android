@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.rockbase.unplugged.DeveloperKey;
 import com.rockbase.unplugged.R;
 import com.rockbase.unplugged.activities.MainActivity;
 import com.rockbase.unplugged.engine.PageAdapter;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public final class VideoListFragment extends ListFragment implements AdapterView.OnItemLongClickListener, DialogInterface.OnClickListener {
 
-    private static final String YOUTUBE_INFO_URL = "http://gdata.youtube.com/feeds/api/playlists/_ID_?v=2&alt=json";
+    private static final String YOUTUBE_INFO_URL = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=_ID_&key=" + DeveloperKey.DEVELOPER_KEY_HTTP; //"http://gdata.youtube.com/feeds/api/playlists/_ID_?v=2&alt=json";
 
     private static final int ANIMATION_DURATION_MILLIS = 300;
     private static final int TIP_DURATION = 4000;
